@@ -12,8 +12,7 @@ def deepcopy(matrix):
         Function that make a deep copy to matrix
         Return: New matrix
     """
-    new_matrix = [row[:] for row in matrix]
-    return new_matrix
+    return [row[:] for row in matrix]
 
 
 def cat_matrices2D(mat1, mat2, axis=0):
@@ -27,10 +26,11 @@ def cat_matrices2D(mat1, mat2, axis=0):
     conc_result = deepcopy(mat1)
     for i in range(0, 2):
         if i == axis and axis == 0:
-            conc_result += mat2
+            for row in mat2:
+                conc_result.append(row)
         elif (i == axis and axis == 1):
-            for j in range(len(conc_result)):
-                conc_result[j] += list(mat2[j])
+            for col in range(len(conc_result)):
+                conc_result[col] += list(mat2[col])
         pass
     if (conc_result == mat1):
         return None

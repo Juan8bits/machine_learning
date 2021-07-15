@@ -14,7 +14,7 @@ def add_matrices2D(mat1, mat2):
         Return: New matrix with sum result.
     """
     sum_result = []
-    if (matrix_shape(mat1) == matrix_shape(mat2) and mat1 and mat2):
+    if (matrix_shape(mat1) == matrix_shape(mat2) and len(mat1) and len(mat2)):
         shape = matrix_shape(mat1)
         for row in range(shape[0]):
             empty_row = []

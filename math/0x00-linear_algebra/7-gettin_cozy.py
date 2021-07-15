@@ -27,7 +27,7 @@ def cat_matrices2D(mat1, mat2, axis=0):
     if axis == 0 and len(mat1[0]) == len(mat2[0]):
         for row in mat2:
             conc_result.append(row)
-    elif axis == 1 and len(mat1) == len(mat2):
+    elif axis == 1:
         for col in range(len(conc_result)):
             conc_result[col] += list(mat2[col])
     else:

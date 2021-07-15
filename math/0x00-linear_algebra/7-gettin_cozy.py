@@ -12,9 +12,6 @@ def cat_matrices2D(mat1, mat2, axis=0):
         Function that concatenates two 2D matrices along specific axis
         Return: New matrix
     """
-    if (len(mat1) == 0 and len(mat2) == 0) or\
-            (len(mat1[0]) == 0 and len(mat2[0]) == 0):
-        return None
     # make a deep copy
     conc_result = [row[:] for row in mat1]
     if axis == 0 and len(mat1[0]) == len(mat2[0]):

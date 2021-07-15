@@ -21,6 +21,5 @@ def add_matrices2D(mat1, mat2):
             for column in range(shape1[1]):
                 empty_row.append(mat1[row][column] + mat2[row][column])
             sum_result.append(empty_row)
-    else:
-        return None
-    return sum_result
+        return sum_result
+    return None

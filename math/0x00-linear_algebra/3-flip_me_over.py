@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+"""
+    Linear Algebra Module
+    Functions
+        create_empty_transpose_2D_matrix
+        matrix_shape
+        matrix_transpose
+"""
 
 
 def create_empty_transpose_2D_matrix(shape):

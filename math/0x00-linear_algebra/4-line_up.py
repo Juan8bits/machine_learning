@@ -13,8 +13,8 @@ def add_arrays(arr1, arr2):
         Return: New list (array) with sum result.
     """
     sum_result = []
-    if (arr1 and arr2 and len(arr1) == len(arr2)):
-        for i in range(len(arr1)):
-            sum_result.append(arr1[i] + arr2[i])
-        return sum_result
-    return None
+    if len(arr1) != len(arr2):
+        return None
+    for i in range(len(arr1)):
+        sum_result.append(arr1[i] + arr2[i])
+    return sum_result

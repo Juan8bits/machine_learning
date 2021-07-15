@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+""" Linear Algebra module. Function matrix_shape """
 
 
 def matrix_shape(matrix):

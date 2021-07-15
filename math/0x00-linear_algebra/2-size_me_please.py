@@ -9,6 +9,8 @@ def matrix_shape(matrix):
 
         Return: List of integers that represent the matrix shape
     """
+    if len(matrix) == 0 or not matrix:
+        return None
     shape = []
     dimention = matrix
     while (isinstance(dimention, list)):

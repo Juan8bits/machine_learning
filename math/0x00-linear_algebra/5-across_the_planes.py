@@ -14,11 +14,12 @@ def add_matrices2D(mat1, mat2):
         Return: New matrix with sum result.
     """
     sum_result = []
-    if (matrix_shape(mat1) == matrix_shape(mat2) and len(mat1) and len(mat2)):
-        shape = matrix_shape(mat1)
-        for row in range(shape[0]):
+    shape1 = matrix_shape(mat1)
+    shape2 = matrix_shape(mat2)
+    if (shape1 == shape2 and shape1):
+        for row in range(shape1[0]):
             empty_row = []
-            for column in range(shape[1]):
+            for column in range(shape1[1]):
                 empty_row.append(mat1[row][column] + mat2[row][column])
             sum_result.append(empty_row)
     else:

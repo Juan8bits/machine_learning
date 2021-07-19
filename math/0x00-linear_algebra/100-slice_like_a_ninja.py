@@ -3,6 +3,7 @@
     Functions:
         no_slice
 """
+import numpy as np
 
 
 def np_slice(matrix, axes={}):
@@ -23,4 +24,4 @@ def np_slice(matrix, axes={}):
             slices.append(slice(*value))
         else:
             slices.append(slice(None))
-    return matrix[tuple(slices)]
+    return np.array(matrix[tuple(slices)])

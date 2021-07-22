@@ -19,10 +19,8 @@ def poly_integral(poly, C=0):
     if isinstance(poly, list) is False or len(poly) is 0 \
        or isinstance(C, int) is False:
         return None
-    if len(poly) == 1:
-        return [C, poly[0]]
-    integral = [C, poly[0]]
-    for i in range(1, len(poly)):
+    integral = [C]
+    for i in range(len(poly)):
         if poly[i] % (i + 1) is 0:
             integral.append(poly[i]//(i + 1))
         else:

@@ -27,4 +27,6 @@ def poly_integral(poly, C=0):
             integral.append(poly[i]//(i + 1))
         else:
             integral.append(poly[i]/(i + 1))
+    while integral[-1] == 0:
+        integral.pop(-1)
     return integral

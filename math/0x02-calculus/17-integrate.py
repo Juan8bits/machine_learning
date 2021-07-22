@@ -28,5 +28,5 @@ def poly_integral(poly, C=0):
         else:
             integral.append(poly[i]/(i + 1))
     while integral[-1] == 0 and len(integral) > 1:
-        integral.pop(-1)
+        integral.pop()
     return integral

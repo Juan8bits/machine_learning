@@ -15,11 +15,6 @@ def summation_i_squared(n):
             Integer value of the sum, if n is not a valid
             number return None.
     """
-    if isinstance(n, int) is False:
+    if isinstance(n, int) is False and n > 1:
         return None
-
-    initial_condition = 1
-    summatory = 0
-    for i in range(initial_condition, n + 1):
-        summatory += i**2
-    return summatory
+    return (n * (n + 1) * ((2 * n) + 1)) // 6

@@ -9,21 +9,22 @@ def poly_integral(poly, C=0):
     """ Function that calculates the integral of a plynominal
 
     Args:
-        poly ([type]): [description]
-        C (int, optional): [description]. Defaults to 0.
-
+        poly (list): List of coefficients representing a polynomial
+        C (int, optional): Integer representing the integration constant.
+                            Defaults to 0.
     Returns:
-        [type]: [description]
+        New list of coefficients representing the integral of
+        the polynomial. If poly or C are not valid, return None.
     """
     if isinstance(poly, list) is False or len(poly) is 0 \
        or isinstance(C, int) is False:
         return None
     if len(poly) == 1:
-        return poly
+        return [C, poly[0]]
     integral = [C, poly[0]]
     for i in range(1, len(poly)):
-        if poly[i] == 0:
-            integral.append(0)
+        if poly[i] % (i + 1) is 0:
+            integral.append(poly[i]//(i + 1))
         else:
             integral.append(poly[i]/(i + 1))
     return integral

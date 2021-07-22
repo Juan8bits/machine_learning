@@ -14,7 +14,7 @@ def poly_derivative(poly):
         New list of coefficients representing the derivate of the polynomial.
         if poly is not valid return None
     """
-    if isinstance(poly, list) is False:
+    if isinstance(poly, list) is False or len(poly) is 0:
         return None
     if len(poly) == 1:
         return [0]
@@ -22,8 +22,6 @@ def poly_derivative(poly):
     for i in range(1, len(poly)):
         if poly[i] == 0:
             derivate.append(0)
-        elif i == 1:
-            derivate.append(poly[i])
         else:
             derivate.append(i * poly[i])
     return derivate

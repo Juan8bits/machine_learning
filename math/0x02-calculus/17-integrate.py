@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """ Calculus Module
     Functions:
         poly_integral(poly, C=0)

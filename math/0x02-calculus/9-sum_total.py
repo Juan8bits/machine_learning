@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """ Calculus module
     Functions:
         summation_i_squared(n)

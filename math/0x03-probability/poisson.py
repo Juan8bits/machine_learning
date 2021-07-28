@@ -40,9 +40,27 @@ class Poisson:
             f(x) = P(X=x) = ((e^-lambda) * (lambda^ x)) / x!
         """
         k = int(k)
-        if k < 1:
+        if k < 0:
             return 0
         k_fact = 1
         for i in range(1, k + 1):
             k_fact *= i
         return ((self.e ** (-1 * self.lambtha)) * (self.lambtha ** k)) / k_fact
+
+    def cdf(self, k):
+        """ Method that calculates the value of the CDF for a
+            given number of “successes”
+
+        Args:
+            k (int): Is the number of “successes” (Aleatory variable).
+
+        CDF description:
+            P(X=0) + P(X>=1) = 1
+         """
+        k = int(k)
+        if k < 0:
+            return 0
+        cdf = 0
+        for i in range(k + 1):
+            cdf += self.pmf(i)
+        return cdf

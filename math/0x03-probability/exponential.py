@@ -33,7 +33,7 @@ class Exponential:
             a given number of “successes”.
 
         Args:
-            x (int): Is the time period (Aleatory variable).
+            x (int): Is the time period.
 
         PDF description:
             f(x) = P(X=x) = lambda * e^(-lambda*x)
@@ -41,3 +41,14 @@ class Exponential:
         if x < 0:
             return 0
         return (self.lambtha * self.e ** (-1 * (self.lambtha * x)))
+
+    def cdf(self, x):
+        """ Method that calculates the value of the CDF for
+            a given time period.
+
+        Args:
+            x (int): Is the time period.
+        """
+        if x < 0:
+            return 0
+        return (1 - self.e ** (-1 * (self.lambtha * x)))

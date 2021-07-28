@@ -40,4 +40,4 @@ class Exponential:
         """
         if x < 0:
             return 0
-        return (self.lambtha * self.e ** (-1 * (self.lambtha ** x)))
+        return (self.lambtha * self.e ** (-1 * (self.lambtha * x)))

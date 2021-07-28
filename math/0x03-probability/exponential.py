@@ -48,6 +48,8 @@ class Exponential:
 
         Args:
             x (int): Is the time period.
+        CDF description:
+          f(x) = 1 - e^(-lambda * x)
         """
         if x < 0:
             return 0

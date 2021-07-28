@@ -6,6 +6,9 @@
 class Poisson:
     """ Class that represent a poisson distribution
     """
+    pi = 3.1415926536
+    e = 2.7182818285
+
     def __init__(self, data=None, lambtha=1.):
         """ Constructor
 
@@ -25,3 +28,21 @@ class Poisson:
             raise ValueError('data must contain multiple values')
         else:
             self.lambtha = sum(data) / len(data)
+
+    def pmf(self, k):
+        """ Mehotd that calculates the value of the PMF for
+            a given number of “successes”.
+
+        Args:
+            k (int): Is the number of “successes” (Aleatory variable).
+
+        PMF description:
+            f(x) = P(X=x) = ((e^-lambda) * (lambda^ x)) / x!
+        """
+        k = int(k)
+        if k < 1:
+            return 0
+        k_fact = 1
+        for i in range(1, k + 1):
+            k_fact *= i
+        return ((self.e ** (-1 * self.lambtha)) * (self.lambtha ** k)) / k_fact

@@ -36,3 +36,31 @@ class Binomial:
             self.p = 1 - q
             self.n = round(mean / self.p)
             self.p = mean / self.n
+
+    def pmf(self, k):
+        """ Method that calculates the value of the PMF for
+            a given number of “successes”
+
+        Args:
+            k (int): The number of “successes”
+        """
+        k = int(k)
+        if k < 0:
+            return 0
+        fact_n = self.factorial(self.n)
+        fact_k = self.factorial(k)
+        fact_nk = self.factorial((self.n - k))
+        part_1 = fact_n / (fact_k * fact_nk)
+        part_2 = (self.p**k) * ((1 - self.p)**(self.n - k))
+        return part_1*part_2
+
+    def factorial(self, value):
+        """ Method that calculates factorial of a number
+
+        Args:
+            value (int): Value to calculate factorial
+        """
+        factorial = 1
+        for i in range(1, value + 1):
+            factorial *= i
+        return factorial

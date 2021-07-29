@@ -34,5 +34,5 @@ class Binomial:
             variance = sum_/len(data)
             q = variance/mean
             self.p = 1 - q
-            self.n = round(mean / self.p)
-            self.p = mean / self.n
+            self.n = int(round(mean / self.p))
+            self.p = float(mean / self.n)

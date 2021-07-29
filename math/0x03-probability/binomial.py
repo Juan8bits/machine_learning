@@ -54,6 +54,21 @@ class Binomial:
         part_2 = (self.p**k) * ((1 - self.p)**(self.n - k))
         return part_1*part_2
 
+    def cdf(self, k):
+        """ Method that alculates the value of the CDF for
+            a given number of “successes”
+
+        Args:
+            k (int): The number of “successes".
+        """
+        k = int(k)
+        if k < 0:
+            return 0
+        cdf = 0
+        for i in range(k + 1):
+            cdf += self.pmf(i)
+        return cdf
+
     def factorial(self, value):
         """ Method that calculates factorial of a number
 

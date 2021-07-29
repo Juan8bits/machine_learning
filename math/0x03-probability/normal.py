@@ -60,3 +60,16 @@ class Normal:
         part_1 = 1 / (self.stddev * ((2 * self.pi) ** (1/2)))
         exponent = -(1 / 2) * (((x - self.mean) / self.stddev) ** 2)
         return part_1 * self.e ** exponent
+
+    def cdf(self, x):
+        """ Method that calculates the value of the CDF for a
+            given x-value
+
+        Args:
+            x (int): x value.
+        """
+        arg = (x - self.mean) / (self.stddev * (2 ** (1/2)))
+        erf = (2 / self.pi ** 0.5) * \
+              (arg - (arg ** 3) / 3 + (arg ** 5) / 10 -
+               (arg ** 7) / 42 + (arg ** 9) / 216)
+        return (1/2) * (1 + erf)

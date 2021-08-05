@@ -60,6 +60,6 @@ class Neuron:
         """
         # preactivation = np.matmul(self.__W, X) + self.__b
         preactivation = (self.__W @ X) + self.__b
-        activation = 1 / (self.e ** -preactivation)
+        activation = 1 / (1 + self.e ** -preactivation)
         self.__A = activation
         return self.__A

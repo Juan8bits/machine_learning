@@ -59,13 +59,14 @@ class Neuron:
                 - m is the number of examples.
         """
         # preactivation = np.matmul(self.__W, X) + self.__b
-        preactivation = (self.__W @ X) + self.__b
-        activation = 1 / (1 + self.e ** -preactivation)
+        preactivation = (self.W @ X) + self.b
+        activation = 1 / (1 + np.exp(-preactivation))
         self.__A = activation
-        return self.__A
+        return self.A
 
     def cost(self, Y, A):
-        """ Method that calculates the cost of the model using logistic regression.
+        """ Method that calculates the cost of the model using
+            logistic regression.
 
         J=−1/m * ∑mi=1 y(i)log(a(i))+(1−y(i))log(1−a(i))
         Args:
@@ -75,6 +76,5 @@ class Neuron:
                 activated output of the neuron for each example
         """
         m = Y.shape[1]
-        #print(Y.shape[1])
-        j = -(1/m) * np.sum(Y * np.log(A) + (1.0000001 - Y) * np.log(1.0000001 - A))
+        j = -(1/m)*np.sum(Y*np.log(A) + (1-Y) * np.log(1.0000001-A))
         return j

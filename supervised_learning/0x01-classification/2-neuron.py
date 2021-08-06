@@ -62,4 +62,4 @@ class Neuron:
         # preactivation = (self.W @ X) + self.b
         activation = 1 / (1 + np.exp(-preactivation))
         self.__A = activation
-        return self.__A
+        return self.A

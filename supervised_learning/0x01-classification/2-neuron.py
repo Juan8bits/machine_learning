@@ -58,8 +58,8 @@ class Neuron:
                 - nx is the number of input features to the neuron.
                 - m is the number of examples.
         """
-        # preactivation = np.matmul(self.__W, X) + self.__b
-        preactivation = (self.__W @ X) + self.__b
+        preactivation = np.matmul(self.__W, X) + self.__b
+        # preactivation = (self.W @ X) + self.b
         activation = 1 / (1 + np.exp(-preactivation))
         self.__A = activation
         return self.__A

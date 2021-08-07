@@ -98,7 +98,7 @@ class Neuron:
 
             dz = dJ/dz = A - Y
             dW = dJ/dW = X*dz
-            db = dz
+            db = 1/m * dz
 
             gradient descent = θ = θ - α ▼F
 
@@ -111,8 +111,10 @@ class Neuron:
                 the activated output of the neuron for each example
             alpha (float, optional):  Is the learning rate. Defaults to 0.05.
         """
+        # Back propagation derivates.
         dz = A - Y
-        dW = np.matmul(dz, X.T)
+        dW = (1/Y.shape[1]) * np.matmul(dz, X.T)
         db = np.mean(dz)
+        # Aplying gradiant descent
         self.__W = self.W - alpha * dW
         self.__b = self.b - alpha * db

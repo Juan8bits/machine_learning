@@ -97,10 +97,10 @@ class Neuron:
         """ Method that calculates one pass of gradient descent on the neuron.
 
             dz = dJ/dz = A - Y
-            dW = dJ/dW = X*dz
+            dW = dJ/dW = 1/m * X*dz
             db = 1/m * dz
 
-            gradient descent = θ = θ - α ▼F
+            gradient descent -> θ = θ - α ▼F
 
         Args:
             X (numpy object): Numpy.ndarray with shape (nx, m) that
@@ -115,6 +115,6 @@ class Neuron:
         dz = A - Y
         dW = (1/Y.shape[1]) * np.matmul(dz, X.T)
         db = np.mean(dz)
-        # Aplying gradiant descent
+        # Applying gradiant descent
         self.__W = self.W - alpha * dW
         self.__b = self.b - alpha * db

@@ -142,11 +142,11 @@ class NeuralNetwork:
         # Back propagation derivates.
         dz2 = A2 - Y
         dW2 = (1/Y.shape[1]) * np.matmul(dz2, A1.T)
-        db2 = np.sum(dz2) / Y.shape[1]
+        db2 = np.sum(dz2, axis=1, keepdims=True) / Y.shape[1]
 
         dz1 = np.matmul(self.W2.T, dz2) * A1 * (1 - A1)
         dW1 = (1/Y.shape[1]) * np.matmul(dz1, X.T)
-        db1 = np.mean(dz1)
+        db1 = np.sum(dz1, axis=1, keepdims=True) / Y.shape[1]
 
         # Applying gradiant descent for layers
         self.__W2 = self.W2 - alpha * dW2

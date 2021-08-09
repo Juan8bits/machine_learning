@@ -142,7 +142,7 @@ class NeuralNetwork:
         # Back propagation derivates.
         dz2 = A2 - Y
         dW2 = (1/Y.shape[1]) * np.matmul(dz2, A1.T)
-        db2 = np.mean(dz2)
+        db2 = np.sum(dz2) / Y.shape[1]
 
         dz1 = np.matmul(self.W2.T, dz2) * A1 * (1 - A1)
         dW1 = (1/Y.shape[1]) * np.matmul(dz1, X.T)
@@ -150,7 +150,7 @@ class NeuralNetwork:
 
         # Applying gradiant descent for layers
         self.__W2 = self.W2 - alpha * dW2
-        self.__b2 = np.full((1, 1), self.b2 - alpha * db2)
+        self.__b2 = self.b2 - alpha * db2
         self.__W1 = self.W1 - alpha * dW1
         self.__b1 = self.b1 - alpha * db1
 
@@ -171,11 +171,11 @@ class NeuralNetwork:
         """
         if not isinstance(iterations, int):
             raise TypeError('iterations must be an integer')
-        if iterations < 0:
+        if iterations <= 0:
             raise ValueError('iterations must be a positive integer')
         if not isinstance(alpha, float):
             raise TypeError('alpha must be a float')
-        if alpha < 0:
+        if alpha <= 0:
             raise ValueError('alpha must be positive')
 
         for i in range(iterations):

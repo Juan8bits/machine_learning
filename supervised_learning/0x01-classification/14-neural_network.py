@@ -2,7 +2,6 @@
 """  Neural Network Class
 """
 import numpy as np
-import matplotlib as plt
 
 
 class NeuralNetwork:

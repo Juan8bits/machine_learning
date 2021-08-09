@@ -120,9 +120,13 @@ class NeuralNetwork:
     def gradient_descent(self, X, Y, A1, A2, alpha=0.05):
         """ Method that calculates one pass of gradient descent on the neuron.
 
-            dz = dJ/dz = A - Y
-            dW = dJ/dW = 1/m * X*dz
-            db = 1/m * dz
+            dz2 = dJ/dz = A2 - Y
+            dW2 = dJ/dW = 1/m * dz2*A1(transpose)
+            db2 = 1/m * dz2
+
+            dz1 = dJ/dz = W2(transpose) * dz2 * A1(1 - A1)
+            dw1 = dJ/dW = 1/m * dz1*X(tranpose)
+            db1 = 1/m * dz1
 
             gradient descent -> θ = θ - α ▼F
 
@@ -131,21 +135,21 @@ class NeuralNetwork:
                 contains the input data.
             Y (numpy object): Numpy.ndarray with shape (1, m) that
                 contains the correct labels for the input data.
-            A1 (numpy object): Numpy.ndarray with shape (1, m) containing
-                the activated output of the neuron for each example
+            A1 (numpy object): The output of the hidden layer.
+            A2 (numpy object): The predicted output.
             alpha (float, optional):  Is the learning rate. Defaults to 0.05.
         """
         # Back propagation derivates.
-        dz1 = A1 - Y
+        dz2 = A2 - Y
+        dW2 = (1/Y.shape[1]) * np.matmul(dz2, A1.T)
+        db2 = np.mean(dz2)
+
+        dz1 = np.matmul(self.W2.T, dz2) * A1 * (1 - A1)
         dW1 = (1/Y.shape[1]) * np.matmul(dz1, X.T)
         db1 = np.mean(dz1)
-        # Applying gradiant descent for a hidden layer
-        self.__W1 = self.W1 - alpha * dW1
-        self.__b1 = self.b1 - alpha * db1
 
-        dz2 = A2 - Y
-        dW2 = (1/Y.shape[1]) * np.matmul(dz2, A2.T)
-        db2 = np.mean(dz2)
-        # Applying gradiant descent
+        # Applying gradiant descent for layers
         self.__W2 = self.W2 - alpha * dW2
         self.__b2 = np.full((1, 1), self.b2 - alpha * db2)
+        self.__W1 = self.W1 - alpha * dW1
+        self.__b1 = self.b1 - alpha * db1

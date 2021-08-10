@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """  Neural Network Class
 """
-from typing import Type
 import numpy as np
 
 

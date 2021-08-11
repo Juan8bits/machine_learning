@@ -20,4 +20,4 @@ def one_hot_encode(Y, classes):
     """
     output = np.zeros((Y.size, Y.max()+1))
     output[np.arange(Y.size), Y] = 1
-    return output
+    return output.T

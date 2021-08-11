@@ -18,10 +18,9 @@ def one_hot_encode(Y, classes):
         One-hot encoding of Y with shape (classes, m),
         or None on failure.
     """
-    if not isinstance(Y, np.ndarray) or not Y:
+    if not isinstance(Y, np.ndarray) or len(Y) == 0:
         return None
     if not isinstance(classes, int) or classes <= np.amax(Y):
         return None
-    output = np.zeros((Y.size, Y.max()+1))
-    output[np.arange(Y.size), Y] = 1
-    return output.T
+    output = np.eye(classes)[Y].T
+    return output

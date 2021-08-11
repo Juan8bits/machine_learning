@@ -197,7 +197,7 @@ class DeepNeuralNetwork:
 
         cost_per_iter = []
         iters = []
-        for i in range(iterations + 1):
+        for i in range(iterations):
             A, J = self.evaluate(X, Y)
             self.gradient_descent(Y, self.cache, alpha)
             if verbose is True and i % step == 0:
@@ -210,7 +210,7 @@ class DeepNeuralNetwork:
             plt.xlabel('iteration')
             plt.ylabel('cost')
             plt.show()
-        return A, J
+        return self.evaluate(X, Y)
 
     def save(self, filename):
         """ Method that saves the instance object to a file

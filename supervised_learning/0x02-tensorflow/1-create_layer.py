@@ -15,6 +15,6 @@ def create_layer(prev, n, activation):
             layer should use.
     """
     w = tf.contrib.layers.variance_scaling_initializer(mode="FAN_AVG")
-    out = tf.layers.dense(inputs=prev, units=n, activation=activation,
-                          name="layer", kernel_initializer=w)
+    out = tf.layers.Dense(units=n, activation=activation,
+                          name="layer", kernel_initializer=w)(prev)
     return out

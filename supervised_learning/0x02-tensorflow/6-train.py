@@ -39,8 +39,8 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations, alpha,
     loss = calculate_loss(y, y_pred)
     train_op = create_train_op(loss, alpha)
 
-    training_dict = {'x': X_train, 'y': Y_train}
-    validation_dict = {'x': X_valid, 'y': Y_valid}
+    training_dict = {x: X_train, y: Y_train}
+    validation_dict = {x: X_valid, y: Y_valid}
     message = ("After {iteration} iterations:"
                "\n\tTraining Cost: {cost}"
                "\n\tTraining Accuracy: {accuracy}"
@@ -49,18 +49,18 @@ def train(X_train, Y_train, X_valid, Y_valid, layer_sizes, activations, alpha,
                )
 
     init = tf.global_variables_initializer()
-    saver = tf.train.Saver()
+    sess = tf.Session()
+    sess.run(init)
 
-    with tf.Session() as sess:
-        sess.run(init)
-
+    with sess.as_default():
         for i in range(iterations + 1):
             t_loss, t_acc = sess.run([loss, accuracy], feed_dict=training_dict)
             val_loss, val_acc = sess.run([loss, accuracy],
                                          feed_dict=validation_dict)
             if i % 100 == 0 or i == iterations:
-                print(message.format(i, t_loss, t_acc, val_loss, val_acc))
+                print(message.format(iteration=i, cost=t_loss, accuracy=t_acc,
+                                     val_cost=val_loss, val_acc=val_acc))
             if i < iterations:
                 sess.run(train_op, feed_dict=training_dict)
-
-    return saver.save(sess, save_path)
+        saver = tf.train.Saver()
+        return saver.save(sess, save_path)

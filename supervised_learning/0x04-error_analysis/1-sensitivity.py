@@ -2,7 +2,6 @@
 """ Functions:
         sensitivity(confusion)
 """
-
 import numpy as np
 
 

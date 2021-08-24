@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+""" Functions:
+        create_confusion_matrix(labels, logits)
+"""
 import numpy as np
 
 

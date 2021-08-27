@@ -23,7 +23,7 @@ def l2_reg_cost(cost, lambtha, weights, L, m):
     """
     if (L == 0):
         return 0
-    lambtha
+
     sum_w = 0
     for keys in weights:
         if (keys[0] == "W"):

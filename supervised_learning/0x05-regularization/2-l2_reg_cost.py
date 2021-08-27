@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""
-Gradient Descent with L2 Regularization
+""" Functions:
+    l2_reg_cost(cost)
 """
 import tensorflow as tf
 

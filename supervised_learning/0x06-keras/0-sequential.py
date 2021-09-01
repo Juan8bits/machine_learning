@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""
+""" Functions:
+        build_model(nx, layers, activations, lambtha, keep_prob)
 """
 import tensorflow.keras as K
 
@@ -19,13 +20,15 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
     """
     model = K.Sequential()
     regularization = K.regularizers.l2(lambtha)
-    model.add(K.layers.Dense(layers[0], input_shape=(nx,),
-                             activation=activations[0],
-                             kernel_regularizer=regularization))
-    model.add(K.layers.Dropout(1 - keep_prob))
-    for i in range(1, len(activations)):
-        model.add(K.layers.Dense(layers[i], activation=activations[i],
-                                 kernel_regularizer=regularization))
+
+    for i in range(len(activations)):
+        if i is 0:
+            model.add(K.layers.Dense(layers[0], input_shape=(nx,),
+                                     activation=activations[0],
+                                     kernel_regularizer=regularization))
+        else:
+            model.add(K.layers.Dense(layers[i], activation=activations[i],
+                                     kernel_regularizer=regularization))
         if i < len(activations) - 1:
             model.add(K.layers.Dropout(1 - keep_prob))
 

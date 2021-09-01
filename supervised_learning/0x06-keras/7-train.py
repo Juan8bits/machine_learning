@@ -55,7 +55,7 @@ def train_model(network, data, labels, batch_size, epochs,
     Return:
         The History object generated after training the model.
     """
-    def learning_rate():
+    def learning_rate(epochs):
         """ Function that updates the learning rate using
             inverse time decay.
         """

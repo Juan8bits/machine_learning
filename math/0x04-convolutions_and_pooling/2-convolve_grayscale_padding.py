@@ -49,7 +49,6 @@ def convolve_grayscale_padding(images, kernel, padding):
     # Creating the output matrix with shape (m, h, w) as the inital input
     output = np.zeros((m, oh, ow))
 
-
     for x in range(ow):
         for y in range(oh):
             x1 = x + kw

@@ -23,7 +23,7 @@ def early_stopping(cost, opt_cost, threshold, patience, count):
     if (opt_cost - cost - threshold > 0):
         count = 0
     else:
-        count + 1
+        count += 1
     NN_should_be_stopped_early = False
     if (count == patience):
         NN_should_be_stopped_early = True

@@ -9,7 +9,7 @@ inception_block = __import__('0-inception_block').inception_block
 def inception_network():
     """ Function that builds the inception network.
     Return:
-        Keras model
+        Keras model.
     """
     # He et. al initialization for the layers weights
     x = K.Input(shape=(224, 224, 3))

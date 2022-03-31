@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
     Functions:
-        def optimum_k(X, kmin=1, kmax=None, iterations=1000)   
+        def optimum_k(X, kmin=1, kmax=None, iterations=1000)
 """
 import numpy as np
 kmeans = __import__('1-kmeans').kmeans

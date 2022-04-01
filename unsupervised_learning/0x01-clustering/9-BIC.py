@@ -37,37 +37,41 @@ def BIC(X, kmin=1, kmax=None, iterations=1000, tol=1e-5, verbose=False):
             - b is a numpy.ndarray of shape (kmax - kmin + 1) containing the
                 BIC value for each cluster size tested
     """
-    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
-        return None, None, None, None
-    if not isinstance(kmin, int) or kmin < 1:
-        return None, None, None, None
-    if not isinstance(kmax, int) or kmax < kmin:
-        return None, None, None, None
-    if not isinstance(iterations, int):
-        return None, None, None, None
-    if not isinstance(tol, float) or tol < 0:
-        return None, None, None, None
-    if not isinstance(verbose, bool):
+    if (type(X) is not np.ndarray or len(X.shape) != 2):
         return None, None, None, None
 
-    if kmax is None:
-        kmax = iterations
+    n, d = X.shape
 
-    n = X.shape[0]
-    prior_bic = 0
-    likelyhoods = bics = []
-    best_k = kmax
-    pi_prev = m_prev = S_prev = best_res = None
+    if (type(kmin) is not int or kmin < 1 or kmin >= n):
+        return None, None, None, None
+
+    if (kmax is None):
+        kmax = X.shape[0]
+    elif (type(kmax) is not int or kmax <= kmin or kmax > n):
+        return None, None, None, None
+
+    EM = expectation_maximization
+
+    b = []
+    maximizations = []
+    all_k = []
+    all_tll = []
     for k in range(kmin, kmax + 1):
-        pi, m, S, g, ll = expectation_maximization(X, k, iterations, tol,
-                                                   verbose)
-        bic = k * np.log(n) - 2 * ll
-        if np.isclose(bic, prior_bic) and best_k >= k:
-            best_k = k - 1
-            best_res = pi_prev, m_prev, S_prev
-        pi_prev, m_prev, S_prev = pi, m, S
-        likelyhoods.append(ll)
-        bics.append(bic)
-        prior_bic = bic
+        all_k.append(k)
+        pi, m, S, g, tll = EM(X, k, iterations, tol, verbose)
+        if (pi is None or m is None or S is None or g is None or tll is None):
+            return None, None, None, None
+        maximizations.append((pi, m, S))
+        all_tll.append(tll)
+        p = (k * d) * (d + 3) / 2 + k - 1
+        bic = p * np.log(n) - 2 * tll
+        b.append(bic)
 
-    return best_k, best_res, np.asarray(likelyhoods), np.asarray(bics)
+    all_tll = np.array(all_tll)
+    b = np.array(b)
+
+    min_bic_idx = np.argmin(b)
+    best_k = all_k[min_bic_idx]
+    best_result = maximizations[min_bic_idx]
+
+    return best_k, best_result, all_tll, b

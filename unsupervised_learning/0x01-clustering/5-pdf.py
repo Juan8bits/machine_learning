@@ -21,15 +21,20 @@ def pdf(X, m, S):
             or type(m) is not np.ndarray or m.ndim != 1\
             or type(S) is not np.ndarray or S.ndim != 2:
         return None
-    n, d = X.shape
-    if d != m.shape[0] or d != S.shape[0]\
-            or S.shape[0] != S.shape[1] or d != S.shape[1]:
+    if (type(X) is not np.ndarray or len(X.shape) != 2):
         return None
-    determinant = np.linalg.det(S)
-    xm = X - m[np.newaxis, :]
-    norm = 1 / (np.power(2 * np.pi, (d / 2)) * np.sqrt(determinant))
-    inv = np.linalg.inv(S)
-    res = np.exp(-0.5 * (xm @ inv @ xm.T))
-    P = (norm * res)
-    P = P.reshape(len(P) ** 2)[::len(P) + 1]
-    return np.where(P < 1e-300, 1e-300, P) 
+
+    n, d = X.shape
+
+    if (type(m) is not np.ndarray or m.shape != (d,)):
+        return None
+    if (type(S) is not np.ndarray or S.shape != (d, d)):
+        return None
+
+    cov_det = np.linalg.det(S)
+    const = 1 / (((2 * np.pi) ** (d / 2)) * (cov_det ** (1 / 2)))
+    potence = ((X - m) @ np.linalg.inv(S) * (X - m)).sum(axis=1) * (- 1 / 2)
+    P = const * np.exp(potence)
+    P = np.where(P < 1e-300, 1e-300, P)
+
+    return P

@@ -19,22 +19,28 @@ def expectation(X, pi, m, S):
             - g ndarray (k, n) containing posterior probabilities
             - l total log likelihood
     """
-    if type(X) is not np.ndarray or len(X.shape) != 2\
-            or type(pi) is not np.ndarray or len(pi.shape) != 1\
-            or type(m) is not np.ndarray or m.shape != (k, d)\
-            or type(S) is not np.ndarray or S.shape != (k, d, d):
+    if (type(X) is not np.ndarray or len(X.shape) != 2):
+        return None, None
+    if (type(pi)is not np.ndarray or len(pi.shape) != 1):
+        return None, None
+    n, d = X.shape
+    k = pi.shape[0]
+    if (type(m)is not np.ndarray or m.shape != (k, d)):
+        return None, None
+    if (type(S)is not np.ndarray or S.shape != (k, d, d)):
         return None, None
     if (not np.isclose(np.sum(pi), 1)):
         return None, None
 
-    n, d = X.shape
-    k = pi.shape[0]
-    g = []
-    for j in range(k):
-        p = pdf(X, m[j], S[j]) * pi[j]
-        g.append(p)
-    prob = np.array(g)
-    hood = prob.sum(axis=0)
-    prob = prob / hood
-    loghood = np.sum(np.log(hood))
-    return prob, loghood
+    likelihood = []
+
+    for i in range(k):
+        likelihood.append(pdf(X, m[i], S[i]))
+
+    likelihood = np.array(likelihood)
+    l_pi = likelihood * pi[:, np.newaxis]
+    marginal_p = np.sum(likelihood * pi[:, np.newaxis], axis=0)
+    g = l_pi / marginal_p[:, np.newaxis].T
+    tll = (np.log(l_pi.sum(axis=0))).sum()  # l
+
+    return g, tll 

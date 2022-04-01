@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
     Functions:
-        def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False)
+        def expectation_maximization(X, k,
+            iterations=1000, tol=1e-5, verbose=False)
 """
 import numpy as np
 initialize = __import__('4-initialize').initialize
@@ -16,11 +17,12 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
             k: is a positive integer containing the number of clusters
             iterations: is a positive integer containing the maximum number of
                 iterations for the algorithm
-            tol: is a non-negative float containing tolerance of the log likelihood,
-                used to determine early stopping i.e. if the difference is less
-                than or equal to tol you should stop the algorithm
-            verbose: is a boolean that determines if you should print information
-                about the algorithm
+            tol: is a non-negative float containing tolerance of the log
+                likelihood, used to determine early stopping i.e. if the
+                difference is less than or equal to tol you should stop the
+                algorithm
+            verbose: is a boolean that determines if you should print
+                information about the algorithm
             - If True, print Log Likelihood after {i} iterations: {l} every 10
                 iterations and after the last iteration
                 * {i} is the number of iterations of the EM algorithm

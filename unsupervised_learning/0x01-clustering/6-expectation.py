@@ -19,11 +19,14 @@ def expectation(X, pi, m, S):
             - g ndarray (k, n) containing posterior probabilities
             - l total log likelihood
     """
-    if type(X) is not np.ndarray or X.ndim != 2\
-            or type(pi) is not np.ndarray or pi.ndim != 1\
-            or type(m) is not np.ndarray or m.ndim != 2\
-            or type(S) is not np.ndarray or S.ndim != 3:
+    if type(X) is not np.ndarray or len(X.shape) != 2\
+            or type(pi) is not np.ndarray or len(pi.shape) != 1\
+            or type(m) is not np.ndarray or m.shape != (k, d)\
+            or type(S) is not np.ndarray or S.shape != (k, d, d):
         return None, None
+    if (not np.isclose(np.sum(pi), 1)):
+        return None, None
+
     n, d = X.shape
     k = pi.shape[0]
     g = []

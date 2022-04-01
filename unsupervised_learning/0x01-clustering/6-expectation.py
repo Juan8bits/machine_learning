@@ -21,13 +21,13 @@ def expectation(X, pi, m, S):
     """
     if (type(X) is not np.ndarray or len(X.shape) != 2):
         return None, None
-    if (type(pi)is not np.ndarray or len(pi.shape) != 1):
+    if (type(pi) is not np.ndarray or len(pi.shape) != 1):
         return None, None
     n, d = X.shape
     k = pi.shape[0]
-    if (type(m)is not np.ndarray or m.shape != (k, d)):
+    if (type(m) is not np.ndarray or m.shape != (k, d)):
         return None, None
-    if (type(S)is not np.ndarray or S.shape != (k, d, d)):
+    if (type(S) is not np.ndarray or S.shape != (k, d, d)):
         return None, None
     if (not np.isclose(np.sum(pi), 1)):
         return None, None
@@ -43,4 +43,4 @@ def expectation(X, pi, m, S):
     g = l_pi / marginal_p[:, np.newaxis].T
     tll = (np.log(l_pi.sum(axis=0))).sum()  # l
 
-    return g, tll 
+    return g, tll
